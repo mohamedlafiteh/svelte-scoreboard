@@ -1,21 +1,29 @@
 <script>
- let name ="Mohamed Lafiteh";
+  import Navbar from "./Navbar.svelte";
+  import Player from "./Player.svelte";
+  import AddPlayer from "./AddPlayer.svelte";
+
+  let players = [
+    { name: "Mohamed", points: 55 },
+    { name: "Sam", points: 44 },
+    { name: "Sara", points: 30 }
+  ];
+
+  const addPlayer = e => {
+    const newPlayer = e.detail;
+    players = [...players, newPlayer];
+  };
 </script>
 
-<main>
-	<h1>Hello {name}!</h1>
-</main>
+<Navbar />
+<div class="container">
+  <AddPlayer on:addplayer={addPlayer} />
 
-<style>
-	
-	h1 {
-		color: #ff3e00;
-	
-	}
-
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
-	}
-</style>
+  {#if players.length === 0}
+    <p>No players</p>
+  {:else}
+    {#each players as player}
+      <Player name={player.name} points={player.points} />
+    {/each}
+  {/if}
+</div>
