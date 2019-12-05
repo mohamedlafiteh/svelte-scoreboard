@@ -16,7 +16,7 @@
 </script>
 
 <Navbar />
-<div class="container">
+<div class="Container">
   <AddPlayer on:addplayer={addPlayer} />
 
   {#if players.length === 0}
